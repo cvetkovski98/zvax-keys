@@ -2,12 +2,15 @@ module github.com/cvetkovski98/zvax-keys
 
 go 1.19
 
+replace github.com/cvetkovski98/zvax-common => ../common
+
 require (
+	github.com/cvetkovski98/zvax-common v0.0.0-20230104174536-9605b23c4599
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.14.0
 	github.com/uptrace/bun v1.1.9
-	google.golang.org/grpc v1.50.1
+	google.golang.org/grpc v1.51.0
 )
 
 require (
