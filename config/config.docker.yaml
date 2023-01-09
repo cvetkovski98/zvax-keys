@@ -1,10 +1,10 @@
 db:
   type: postgres
-  host: localhost
+  host: postgres
   port: 5432
   user: postgres
   pass: changeme
-  name: keystest
+  name: keys
   pool:
     max_conn: 16
     min_conn: 4
