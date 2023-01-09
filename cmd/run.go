@@ -8,6 +8,7 @@ import (
 	"github.com/cvetkovski98/zvax-common/pkg/postgresql"
 	"github.com/cvetkovski98/zvax-keys/internal/config"
 	"github.com/cvetkovski98/zvax-keys/internal/delivery"
+	"github.com/cvetkovski98/zvax-keys/internal/model/migrations"
 	"github.com/cvetkovski98/zvax-keys/internal/repository"
 	"github.com/cvetkovski98/zvax-keys/internal/service"
 	"github.com/spf13/cobra"
@@ -40,6 +41,9 @@ func run(cmd *cobra.Command, args []string) {
 	db, err := postgresql.NewPgDb(&cfg.PostgreSQL)
 	if err != nil {
 		log.Fatalf("failed to connect to database: %v", err)
+	}
+	if err := postgresql.Migrate(cmd.Context(), db, migrations.Migrations); err != nil {
+		log.Fatalf("failed to migrate database: %v", err)
 	}
 	keyRepository := repository.NewPgKeyRepository(db)
 	keyService := service.NewKeyServiceImpl(keyRepository)
